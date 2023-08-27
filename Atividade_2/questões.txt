@@ -1,0 +1,40 @@
+1) Levantamento de pontos: Levando em consideração meus primeiros códigos em python (repositório p3dru/python), percebi que havia muita repetição
+de código, não modularizava e sempre aninhava diversos if's e elses. Em repositórios mais recentes como o /trieventos
+em js, passei a modularizar mais funções, mas ainda inseri-as no mesmo arquivo principal, bem como deixava também
+algumas classes.
+Melhorias no momento: Refatoração e utilização dos princípios Fail Fast e Tell don't ask para evitar aninhamento de código,
+criar arquivo para funções e utilizar um arquivo para cada classe criada.
+
+2)Tive um pouco de dificuldade em entender como aplicar esse princípio, já que à primeira vista o código é bem simples
+mas com ajuda do chatGPT consegui identificar um problema (que acredito qeu seja o real motivo para esse princípio):
+O código refatorado seria assim:
+public class Post{
+
+    public void publish(){
+        if(canBePublished()){
+            setStatus(Status.PUBLISHED);
+        } else {
+            throw new RuntimeException("Cannot publish the post")
+            }
+        }
+
+        private boolean canBePublished(){
+            return getStatus() == Status.DRAFT && !isTextEmpty();
+        }
+
+        private boolean isTextEmpty(){
+            return getText().trim().isEmpty();
+        }
+    }
+
+O que eu entendi desse código foi:
+Na linha 2 - verifica se é possível publicar, delegando essa validação à função canBePublished e dependendo do retorno, publica ou não
+Na linha 9 - a função realiza a validação em si, para validar ela utiliza dois parâmetros que é saber se o status do post é um rascunho
+e se o texto está vazio. Ele delega a segunda validação à função isTextEmpty e com o retorno dessa função, faz seu cálculo e retorna a
+própria resposta.
+
+Basicamente é uma delegação de atribuições onde cada validação é feita por uma função afim tornar o código mais legível e de fácil manutenção.
+
+3) 4) e 5) tenho um repositório no qual mirei para fazer todas essas alterações que é o /trieventos, como ele é muito grande e quero
+transformar ele de javascript para typescript, farei essas alterações nos códigos e isso demorará muito mais tempo do que o tempo estipulado
+para a atividade.
