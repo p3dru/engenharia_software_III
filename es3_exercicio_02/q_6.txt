@@ -1,0 +1,2 @@
+O que é acoplamento entre classes?
+É a relação de dependência entre classes, a "medição" de quanto uma classe depende (e conhece) de outra classe pra funcionar.
